@@ -8,20 +8,14 @@
     {
         "id": 2,
         "name": "raju",
-        "dept": "it",
-        "salary": 400000.0
+        "dept": "testing",
+        "salary": 434355363465.0
     },
     {
         "id": 3,
         "name": "kavya",
         "dept": "sales",
         "salary": 5467.0
-    },
-    {
-        "id": 8,
-        "name": "phil",
-        "dept": "testing",
-        "salary": 565576.0
     },
     {
         "id": 10,

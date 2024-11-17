@@ -14,7 +14,7 @@ def add_employee():
     name = input("Enter employee name: ")
     dept = input("Enter employee department: ")
     salary = float(input("Enter employee salary: "))
-    #id     =input("Enter employee id:")
+    id     =input("Enter employee id:")
     # Load existing employees
     with open(file_name, "r") as file:
         employees = json.load(file)
@@ -69,6 +69,7 @@ def get_name_by_id(emp_id):
     for employee in employees:
      if employee["id"] ==emp_id:       
       return employee["name"]
+    return"employee not found"
      
 def view_all_employees(): 
     with open(file_name, "r") as file:
@@ -97,6 +98,7 @@ def update_employee():
     with open(file_name,"r")as file:
       employees=json.load(file)
       for employee in employees:
+         
          if employee["id"]== emp_id:
            print(f"current departement: {employee['dept']}")
            # Get new department and salary
@@ -107,7 +109,6 @@ def update_employee():
             employee["dept"]=new_dept
            if new_sal:
             employee["salary"]=new_sal 
-            employees.append(employee)
            #Save changes back to the JSON file
            with open(file_name,"w")as file:
              json.dump(employees,file,indent=4)
@@ -131,7 +132,24 @@ def delete_employee():
          print(f"employee id {emp_id} deleted successfully.")
          return
     print("employee id not found.")
-    
+
+def filter_by_department():
+    """Filter employees by a specific department."""
+    # Load the existing employees
+    with open(file_name, "r") as file:
+     employees = json.load(file)
+
+    # Get the department from the user
+    dept = input("Enter the department to filter by: ")
+    #  Filter employees by the specified department using a list comprehension
+    filtered =[employee for employee in employees if employee["dept"]==dept]
+
+    # Display results
+    if filtered:
+      print(f"employees under department: {dept}")
+      print(f"{filtered}")
+    else:
+      print(f"No employees found in the '{dept}' department.")
 
 def main():
     """Main function with a menu to interact with the program."""
@@ -142,16 +160,17 @@ def main():
         print("3. Get employee salary by ID")
         print("4. Get employee name by ID")
         print("5. View all employees")
-        print("6. get employee by name")  # 
+        print("6. get employee by name")  
         print("7.update employee's details:")
         print("8.delete employee,s details")
-        print("9. Exit")
+        print("9.Filter employees by specific department")   
+        print("10. Exit")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
             add_employee()
-        
+       
         elif choice == "2":
             emp_id = int(input("Enter employee ID to get dept: "))
             print("deparment:", get_dept_by_id(emp_id))
@@ -169,15 +188,21 @@ def main():
         
         elif choice == "6":
             search_employee()  # Call the new search function
+        
         elif choice =="7":
             update_employee()
+        
         elif choice=="8":
            delete_employee()
+        
         elif choice == "9":
-            print("Exiting program.")
-            break
+            filter_by_department()
+        
+        elif choice == "10":
+         print("Exiting program.")
+         break
         else:
-            print("Invalid choice. Please try again.")
+         print("Invalid choice. Please try again.")
 
 # Run the main function
 if __name__ == "__main__":
