@@ -8,8 +8,8 @@
     {
         "id": 2,
         "name": "raju",
-        "dept": "testing",
-        "salary": 434355363465.0
+        "dept": "it",
+        "salary": 437.0
     },
     {
         "id": 3,
@@ -21,19 +21,19 @@
         "id": 10,
         "name": "beth",
         "dept": "stubs",
-        "salary": 65665676.0
+        "salary": 650000.0
     },
     {
         "id": 11,
         "name": "raghuver",
         "dept": "it",
-        "salary": 54545654.0
+        "salary": 70000.0
     },
     {
         "id": 12,
         "name": "ravan",
         "dept": "it",
-        "salary": 7556677.0
+        "salary": 30000.0
     },
     {
         "id": 13,

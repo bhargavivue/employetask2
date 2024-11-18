@@ -151,6 +151,43 @@ def filter_by_department():
     else:
       print(f"No employees found in the '{dept}' department.")
 
+
+
+
+
+
+
+
+
+
+def filter_by_salary_range():
+    """Filter employees based on a salary range."""
+    # Load the existing employees
+    with open(file_name, "r") as file:
+        employees = json.load(file)
+
+    if not employees:
+        print("No employees found.")
+        return
+
+    try:
+        # Get the salary range from the user
+        min_salary = float(input("Enter the minimum salary: "))
+        max_salary = float(input("Enter the maximum salary: "))
+
+        # Filter employees within the salary range
+        filtered_employees = [
+            emp for emp in employees if min_salary <= emp["salary"] <= max_salary
+        ]
+
+        # Display results
+        if filtered_employees:
+            print(f"\nEmployees with salary in the range {min_salary} - {max_salary}:")
+            print(f"{filtered_employees}")
+        else:
+            print(f"No employees found in the salary range {min_salary} - {max_salary}.")
+    except ValueError:
+        print("Invalid input. Please enter valid numbers for the salary range.")
 def main():
     """Main function with a menu to interact with the program."""
     while True:
@@ -164,7 +201,8 @@ def main():
         print("7.update employee's details:")
         print("8.delete employee,s details")
         print("9.Filter employees by specific department")   
-        print("10. Exit")
+        print("10. Filter employees by salary range")
+        print("11. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -199,6 +237,9 @@ def main():
             filter_by_department()
         
         elif choice == "10":
+            filter_by_salary_range()
+        
+        elif choice == "11":
          print("Exiting program.")
          break
         else:
