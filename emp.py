@@ -151,15 +151,6 @@ def filter_by_department():
     else:
       print(f"No employees found in the '{dept}' department.")
 
-
-
-
-
-
-
-
-
-
 def filter_by_salary_range():
     """Filter employees based on a salary range."""
     # Load the existing employees
@@ -188,61 +179,87 @@ def filter_by_salary_range():
             print(f"No employees found in the salary range {min_salary} - {max_salary}.")
     except ValueError:
         print("Invalid input. Please enter valid numbers for the salary range.")
+
+def calculate_avearge_salary_by_department():
+  """Calculate and display the average salary of employees in each department."""  
+  with open(file_name,"r") as file:
+     employees=json.load(file)
+     if not employees:
+        print("no employees found.")
+        return
+    # Group salaries by department
+     department_salaries={}     
+     for employee in employees:
+        dept = employee.get("dept")  # Safely get the department
+        salary = employee.get("salary")  # Safely get the salary
+        if dept and salary:  # Ensure dept and salary exist
+            if dept not in department_salaries:
+                department_salaries[dept] = []
+            department_salaries[dept].append(salary)  
+    # Calculate and display average salary for each department
+     print("\nAverage Salary by Department:")
+     for dept, salaries in department_salaries.items():
+        avg_salary = sum(salaries) / len(salaries)
+        print(f"Department: {dept}, Average Salary: {avg_salary:.2f}")
 def main():
     """Main function with a menu to interact with the program."""
-    while True:
-        print("\nChoose an option:")
-        print("1. Add a new employee")
-        print("2. Get employee dept by ID")
-        print("3. Get employee salary by ID")
-        print("4. Get employee name by ID")
-        print("5. View all employees")
-        print("6. get employee by name")  
-        print("7.update employee's details:")
-        print("8.delete employee,s details")
-        print("9.Filter employees by specific department")   
-        print("10. Filter employees by salary range")
-        print("11. Exit")
+while True:
+    print("\nChoose an option:")
+    print("1. Add a new employee")
+    print("2. Get employee dept by ID")
+    print("3. Get employee salary by ID")
+    print("4. Get employee name by ID")
+    print("5. View all employees")
+    print("6. get employee by name")  
+    print("7.update employee's details:")
+    print("8.delete employee,s details")
+    print("9.Filter employees by specific department")   
+    print("10. Filter employees by salary range")
+    print("11. Calculate average salary by department")
+    print("12. Exit")
 
-        choice = input("Enter your choice: ")
+    choice = input("Enter your choice: ")
 
-        if choice == "1":
+    if choice == "1":
             add_employee()
        
-        elif choice == "2":
+    elif choice == "2":
             emp_id = int(input("Enter employee ID to get dept: "))
             print("deparment:", get_dept_by_id(emp_id))
         
-        elif choice == "3":
+    elif choice == "3":
             emp_id = int(input("Enter employee ID to get salary: "))
             print("Salary:", get_salary_by_id(emp_id))
         
-        elif choice == "4":
+    elif choice == "4":
             emp_id = int(input("Enter employee ID to get name: "))
             print("name:", get_name_by_id(emp_id))
         
-        elif choice == "5":
+    elif choice == "5":
             view_all_employees()
         
-        elif choice == "6":
+    elif choice == "6":
             search_employee()  # Call the new search function
         
-        elif choice =="7":
+    elif choice =="7":
             update_employee()
         
-        elif choice=="8":
+    elif choice=="8":
            delete_employee()
         
-        elif choice == "9":
+    elif choice == "9":
             filter_by_department()
         
-        elif choice == "10":
+    elif choice == "10":
             filter_by_salary_range()
         
-        elif choice == "11":
+    elif choice == "11":
+            calculate_avearge_salary_by_department()
+    
+    elif choice == "12":
          print("Exiting program.")
          break
-        else:
+    else:
          print("Invalid choice. Please try again.")
 
 # Run the main function
